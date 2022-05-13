@@ -1,18 +1,3 @@
-###        Note about formating
-### ----------------------------------
-### This script assumes the uncleaned
-### data is still formatted in the
-### correct manner. See notes below
-
-### E:Excercise Name/Goal Reps
-### S:Sets and Reps (SetsXReps)
-### W:Weight Used (in lbs)
-### R:Reserve Reps
-### N:Notes, seperate each note with two
-###     't' characters immediatle followed
-###     by a dasha and space
-###     like so: 'tt- '
-
 import re
 import sys
 
@@ -23,26 +8,26 @@ def ProcessData(data):
 
     for line in data:
 
-        line = re.sub('\n', '', line)       # Remove newline characters
+        line = re.sub('\n', '', line)
 
 
-        if (line == ''):                    # If line is empty, skip it
+        if (line == ''):
             continue
-        elif (line.startswith("N:0")):      # If line is empty note, mark as "N/A"
+        elif (line.startswith("N:0")):
             line = 'xxN/A'
-        elif (line.startswith("E:")):       # If line is excercise, add first pipe
+        elif (line.startswith("E:")):
             line = 'xx|' + line[2:]
-            if (isFirstExcercise == True):  # If not first excercise, add newline
+            if (isFirstExcercise == True):
                 isFirstExcercise = False
             else:
                 line = 'xx\n' + line[2:]
-        elif (line.startswith("N:")):       # If line is note, replace line breaks with actual breaks
+        elif (line.startswith("N:")):
             line = re.sub('tt- ', '<br>- ', line)
 
-        output += line[2:]                  # Add line minus the first two characters to Output
+        output += line[2:]
 
         if (output.endswith('|') == False):
-            output += '|'                   # If no pipe at end of Output, add pipe
+            output += '|'
     return output
 
 readfile = open("paste_workout_data_here.txt", "r")
