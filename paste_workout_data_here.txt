@@ -1,0 +1,23 @@
+E:Smith Rack Back Squat
+S:1X10
+W:125
+R:1-2
+N:0
+
+E:DB Bench Press (45°)
+S:1X10
+W:2X45
+R:1-3
+N:- The utmost subtle sensation in my right shoulder, but stopped once I set weights to 45°
+
+E:Smith Rack Split Squat
+S:1X10
+W:95
+R:1
+N:- Very tiring lol
+
+E:DB Standing Overhead Press
+S:1X10
+W:2X30
+R:1-2
+N:- Feel like I could've gone up another 5 but was u sure if I could do the whole settt- Well leave it for next week
