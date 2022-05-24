@@ -1,6 +1,15 @@
 import re
 import sys
 
+def GetData():
+    print("\n\nPlease paste your data below using Ctrl+Shift+V.\nWhen you are done, press Ctrl+D for Linux/Mac or Ctrl+Z for Windows.\n\n")
+    lines = []
+    try:
+        lines = sys.stdin.readlines()
+    except EOFError:
+        pass
+    return lines
+
 def ProcessData(data):
 
     isFirstExcercise = True
@@ -9,7 +18,6 @@ def ProcessData(data):
     for line in data:
 
         line = re.sub('\n', '', line)
-
 
         if (line == ''):
             continue
@@ -30,13 +38,14 @@ def ProcessData(data):
             output += '|'
     return output
 
-readfile = open("paste_workout_data_here.txt", "r")
+def PrintData(data):
+    # Many print() calls are much easier to look at in the code
+    # and I'm not too worried about the speed of a 50 line text formatting script.
+    print("\n\nYour formatted data is printed below:\n*************************************\n")
+    print("|Excercise|Sets/Reps|Weight|Reserve Reps|Notes|\n|---|---|---|---|---|")
+    print(data)
+    print("\n*************************************\n")
 
-Input = []
-Output = ""
-
-Input = readfile.readlines()
-Output = ProcessData(Input)
-
-print("|Excercise|Sets/Reps|Weight|Reserve Reps|Notes|\n|---|---|---|---|---|")
-print(Output)
+data = GetData()
+data = ProcessData(data)
+PrintData(data)
