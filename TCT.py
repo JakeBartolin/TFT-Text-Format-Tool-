@@ -8,13 +8,12 @@ def Main():
 
 ********************
 * Text Format Tool *
-********************
+******************** 
 
 """
     functionSelect = """Please select a function:
 1) Format Workout Data
-2) Format Chord Charts
-3) Extract Lyrics
+2) Formate Chord Chart and Lyrics
 x) Exit
 
 """
@@ -28,9 +27,7 @@ x) Exit
         if userInput == "1":
             FormatWorkoutData()
         elif userInput == "2":
-            FormatChordCharts()
-        elif userInput == "3":
-            ExtractLyrics()
+            FormatChordChartAndLyrics()
         elif userInput == "x":
             isActive = False
         else:
@@ -49,14 +46,26 @@ def GetText():
     return lines
 
 def FormatWorkoutData():
-    print("Starting Format Workout Data subscript...\n")
+    print("Starting Format Workout Data Subscript...\n")
     text = GetText()
     text = ProcessWorkoutData(text)
-    PrintWorkoutData(text)
+   
+    print("\n\nYour formatted data is printed below:\n\n")
+    print(f"|Excercise|Sets/Reps|Weight|Reserve Reps|Notes|\n|---|---|---|---|---|{text}\n\n")
+
     return
 
-def FormatChordCharts():
+def FormatChordChartAndLyrics():
+    print("Starting Extract Chords and Lyrics Subscript...\n")
     text = GetText()
+
+    print("********************************\n*Your chords are printed below:*\n********************************\n")
+    print(ExtractChordChart(text) + "\n\n")
+
+    print("********************************\n*Your lyrics are printed below:*\n********************************\n")
+    print(ExtractLyrics(text))
+
+def ExtractChordChart(text):
     output = ""
 
     for line in text:
@@ -64,25 +73,42 @@ def FormatChordCharts():
             continue
         else:
             output = output + line
+            
+    return output
 
-    print("Your chord chart is printed below:\n******************************\n\n\n")
-    print(output)
-    return
-
-def ExtractLyrics():
-    text = GetText()
+def ExtractLyrics(text):
     output = ""
 
     for line in text:
+        spaceCount = 0
+
         if line == "\n":
             continue
 
-        if line == "[Chorus]":
-            line = "# Chorus"
+        if line.startswith(" "):
+            line = line.replace(" ", "", 1)
+        
+        for character in line:
+            if character == " ":
+                spaceCount += 1
+        if spaceCount > (len(line) / 3):
+            continue
+
+        if line == "[Intro]":
+            continue
+
+        if line.__contains__("[Chorus]"):
+            line = line.replace("[Chorus]", "## Chorus")
+        elif line.__contains__("[Verse]"):
+            line = line.replace("[Verse]", "## Verse")
+        elif line.__contains__("[Bridge]"):
+            line = line.replace("[Bridge]", "## Bridge")
+        elif line.__contains__("[Solo]"):
+            line = line.replace("[Solo]", "## Solo")
         
         output += line
     
-    print(text)
+    print(output)
     return
 
 def ProcessWorkoutData(data):
@@ -114,11 +140,7 @@ def ProcessWorkoutData(data):
     return output
 
 def PrintWorkoutData(data):
-    # Many print() calls are much easier to look at in the code
-    # and I'm not too worried about the speed of a 50 line text formatting script.
     print("\n\nYour formatted data is printed below:\n\n")
-    print("|Excercise|Sets/Reps|Weight|Reserve Reps|Notes|\n|---|---|---|---|---|")
-    print(data)
-    print("\n\n")
+    print(f"|Excercise|Sets/Reps|Weight|Reserve Reps|Notes|\n|---|---|---|---|---|{data}\n\n")
 
 Main()
