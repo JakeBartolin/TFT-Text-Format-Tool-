@@ -1,13 +1,13 @@
 import re
 import sys
+
 # Create array of string pairs,
 # each a replacement term and what to replace it with.
-ARRAY_OF_REPLACEMENT_TERMS = [["\n\n\n", "\n|"],
-                              ["E:", "|"],
+ARRAY_OF_REPLACEMENT_TERMS = [["\nE:", "|"],
+                              ["E:",   "|"],
                               ["\nS:", "|"],
                               ["\nW:", "|"],
                               ["\nR:", "|"],
-                              ["\nN:0", "N/A"],
                               ["\nN:", "|"]]
 
 def main():
@@ -19,7 +19,7 @@ def main():
     
     raw_data = get_pasted_multiline_text()
     data = process_workout_data("".join(raw_data))
-    print(data)
+    print_workout_data(data)
 
     print("Exiting Script....")
 
@@ -35,22 +35,24 @@ def get_pasted_multiline_text():
     return lines
 
 def process_workout_data(raw_data):
-    
-    for shorthand_term, replacement in ARRAY_OF_REPLACEMENT_TERMS:
-        processed_data = re.sub(shorthand_term, replacement, raw_data)
+    # This whole thing could be alot cleaner if I used regular expressions
+    # but IDK how to do those right now and it's getting late. This will
+    # still not put a "|" at the end of each line, so that will need fixed.
+    # 2023-01-15 JB
+    for replace_key in ARRAY_OF_REPLACEMENT_TERMS:
+        raw_data = re.sub(replace_key[0], replace_key[1], raw_data)
 
-    return processed_data
+    return raw_data
 
 def print_workout_data(data):
-    print(f"\n"
-        "\n"
-        "Your formatted data is printed below:\n"
-        "\n"
-        "|Excercise|Sets/Reps|Weight|Reserve Reps|Notes|\n"
-        "|---|---|---|---|---|\n"
-        "{data}\n"
-        "\n")
-    
+    print(f"\n\n"
+          "****************************************\n"
+          "* Your formatted data is printed below *\n"
+          "****************************************\n"
+          "\n"
+          "|Excercise|Sets/Reps|Weight|Reserve Reps|Notes|\n"
+          "|---|---|---|---|---|\n"
+          f"{data}\n\n")
     
 if __name__ == "__main__":
     main()
