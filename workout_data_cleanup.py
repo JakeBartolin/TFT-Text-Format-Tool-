@@ -1,8 +1,7 @@
 import re
 import sys
 
-# Create array of string pairs,
-# each a replacement term and what to replace it with.
+# Array of replacement terms + replacement values.
 ARRAY_OF_REPLACEMENT_TERMS = [["\nE:", "|"],
                               ["E:",   "|"],
                               ["\nS:", "|"],
@@ -24,7 +23,8 @@ def main():
     print("Exiting Script....")
 
 def get_pasted_multiline_text():
-    # Known bug where this doesn't return if the pasted text doesn't end with a newline char
+    # Known bug where this doesn't return if the pasted text doesn't end
+    # with a newline character.
     
     print("Please paste your data below using Ctrl+Shift+V.\n"
         "When you are done, press Ctrl+D for Linux/Mac or Ctrl+Z for Windows.\n")

@@ -1,7 +1,7 @@
 # Use
 `workout_data_cleanup` is a simple python script I use to format my workout data I generate while I'm in the gym. I use [Joplin](https://joplinapp.org/) to keep track of reps/excercises. While markdown tables look nice, they're not something I want to create while I'm excercising.
 
-Over the past year or so, I developed a short hand for keeping track of my workout while at the gym. This short hand makes it easy to quickly move on from recording so I can stay focused and get done in a timely manner. this script simply takes this short hand and reformats it to a Joplin-friendly markdown table that I can then paste into the app.
+I developed a short hand system for keeping track of my workout while at the gym. This short hand makes it easy to quickly record sets so I can stay focused and get done in a timely manner. The script simply takes this short hand and reformats it to a Joplin friendly markdown table that I can then paste into the app.
 
 # Before/After
 ```
